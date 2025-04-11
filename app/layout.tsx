@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Sebuah permintaan maaf yang tulus dari Mas untuk Ade",
   openGraph: {
     images: ["/og-image.png"],
-    url: "https://maaf-ya-sayaaaaang.vercel.app/",
+    url: "https://maaf-yaa-sayangkuu.vercel.app/",
     siteName: "Maaf Ya, Sayang",
     locale: "id_ID",
     type: "website",
