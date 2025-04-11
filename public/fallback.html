@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Test</title>
+</head>
+<body>
+  <h1>Audio Test Page</h1>
+  <p>Click the button below to test if the audio works:</p>
+  <button id="playButton">Play Audio</button>
+  <audio id="audioElement" src="/background-music.mp3" preload="auto"></audio>
+  
+  <script>
+    document.getElementById('playButton').addEventListener('click', function() {
+      const audio = document.getElementById('audioElement');
+      audio.play().then(() => {
+        console.log('Audio is playing');
+      }).catch(error => {
+        console.error('Error playing audio:', error);
+      });
+    });
+  </script>
+</body>
+</html>

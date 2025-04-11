@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    button {
+      background: #f472b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .error {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Audio Test Page</h1>
+  <p>This page tests if the audio file can be played correctly.</p>
+  
+  <button id="playButton">Play Audio</button>
+  <button id="pauseButton">Pause Audio</button>
+  
+  <div id="status" class="status"></div>
+  
+  <audio id="audioElement" src="/background-music.mp3" preload="auto"></audio>
+  
+  <script>
+    const audio = document.getElementById('audioElement');
+    const playButton = document.getElementById('playButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const status = document.getElementById('status');
+    
+    // Log audio events
+    audio.addEventListener('canplay', () => {
+      console.log('Audio can play');
+      status.textContent = 'Audio loaded and ready to play';
+      status.className = 'status success';
+    });
+    
+    audio.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
+      status.textContent = 'Error loading audio: ' + (audio.error ? audio.error.message : 'Unknown error');
+      status.className = 'status error';
+    });
+    
+    // Play button
+    playButton.addEventListener('click', () => {
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Audio is playing');
+          status.textContent = 'Audio is playing';
+          status.className = 'status success';
+        }).catch(error => {
+          console.error('Error playing audio:', error);
+          status.textContent = 'Error playing audio: ' + error;
+          status.className = 'status error';
+        });
+      }
+    });
+    
+    // Pause button
+    pauseButton.addEventListener('click', () => {
+      audio.pause();
+      status.textContent = 'Audio paused';
+      status.className = 'status';
+    });
+  </script>
+</body>
+</html>
